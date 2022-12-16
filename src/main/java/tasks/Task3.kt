@@ -15,17 +15,21 @@ package tasks
 12 18 18 12
 16 24 24 16
 12 18 18 12
+
+сумма строк: 60 80 60
+сумма столбцов: 40 60 60 40
  */
 
 fun main() {
-    firstOption()
-    // secondOption()
+    val w = 4
+    val h = 3
+
+    val map = calculateBackground1(w, h)
+    findRowSum(map)
+    findColumnSum(map)
 }
 
-fun firstOption() {
-    val w = 3
-    val h = 4
-
+fun calculateBackground1(w: Int, h: Int): Array<Array<Int>> {
     val map = Array(h) { Array(w) { 0 } }
 
     for (rowMin in 0 until h) {
@@ -52,16 +56,10 @@ fun firstOption() {
     }
     println()
 
-    for (i in map.indices) {
-        if (i == map.size - 1) break
-        var colSum = 0
-        for (j in map.indices) {
-            colSum += map[j][i]
-        }
-        print("$colSum ")
-    }
-    println()
+    return map
+}
 
+fun findRowSum(map: Array<Array<Int>>) {
     for (i in map) {
         var rowSum = 0
         for (j in i) {
@@ -70,13 +68,20 @@ fun firstOption() {
         print("$rowSum ")
     }
     println()
-
 }
 
-fun secondOption() {
-    val w = 3
-    val h = 4
+fun findColumnSum(map: Array<Array<Int>>) {
+    for (i in map.first().indices) {
+        var colSum = 0
+        for (j in map.indices) {
+            val res = map[j][i]
+            colSum += res
+        }
+        print("$colSum ")
+    }
+}
 
+fun calculateBackground2(w: Int, h: Int): Array<Array<Int>> {
     val map = Array(h) { Array(w) { 0 } }
 
     for (i in 0 until h) {
@@ -97,4 +102,7 @@ fun secondOption() {
         }
         println()
     }
+    println()
+
+    return map
 }
