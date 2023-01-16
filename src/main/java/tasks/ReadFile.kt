@@ -2,7 +2,7 @@ package tasks
 
 import java.io.File
 
-const val PATH = "C:\\Users\\1\\Desktop\\Kt\\src\\main\\kotlin\\test\\tasks\\test.txt"
+const val PATH = "C:\\Users\\1\\Desktop\\kotlin\\src\\main\\java\\tasks\\test.txt"
 
 fun main(args: Array<String>) {
     val cmd = args.getOrNull(0)?.lowercase()
