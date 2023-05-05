@@ -58,4 +58,12 @@ class ValidParentheses20 {
         assertEquals(expected, actual)
     }
 
+    @Test
+    fun test_7() {
+        val actual = isValid("(])")
+        val expected = false
+
+        assertEquals(expected, actual)
+    }
+
 }
