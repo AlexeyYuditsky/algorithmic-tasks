@@ -4,10 +4,6 @@ import org.junit.Test
 
 import org.junit.Assert.*
 
-/**
- * https://leetcode.com/problems/valid-parentheses/
- */
-
 class ValidParentheses20 {
 
     @Test
