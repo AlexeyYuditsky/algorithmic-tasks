@@ -1,11 +1,11 @@
 package com.alexeyyuditsky.algorithmictasks.leetcode
 
 fun main() {
-    val res = romanToInt("III")
+    val res = romanToInt("IX")
     println(res)
 }
 
-fun romanToInt(s: String): Int {
+fun romanToInt(str: String): Int {
     val map = mutableMapOf(
         'I' to 1,
         'V' to 5,
@@ -17,9 +17,42 @@ fun romanToInt(s: String): Int {
     )
 
     var result = 0
-    for (c in s)
-        when (c) {
-            'I' -> result += 1
+    for (i in str.indices)
+        when (str[i]) {
+            'I' -> {
+                if (i == str.length - 1) {
+                    result += map[str[i]]!!
+                } else if (str[i + 1] == str[i]) {
+                    result += map[str[i]]!!
+                } else if (str[i + 1] == 'V' || str[i + 1] == 'X') {
+                    result = result + map[str[i + 1]]!! - 1
+                    break
+                }
+            }
+
+            'V' -> {
+                result += map[str[i]]!!
+            }
+
+            'X' -> {
+                result += map[str[i]]!!
+            }
+
+            'L' -> {
+                result += map[str[i]]!!
+            }
+
+            'C' -> {
+                result += map[str[i]]!!
+            }
+
+            'D' -> {
+                result += map[str[i]]!!
+            }
+
+            'M' -> {
+                result += map[str[i]]!!
+            }
         }
 
     return result
