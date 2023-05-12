@@ -1,7 +1,7 @@
 package com.alexeyyuditsky.algorithmictasks.leetcode
 
 fun main() {
-    val res = romanToInt("IX")
+    val res = romanToInt("LX")
     println(res)
 }
 
@@ -17,29 +17,51 @@ fun romanToInt(str: String): Int {
     )
 
     var result = 0
-    for (i in str.indices)
+    for (i in str.indices) {
         when (str[i]) {
             'I' -> {
-                if (i == str.length - 1) {
-                    result += map[str[i]]!!
-                } else if (str[i + 1] == str[i]) {
-                    result += map[str[i]]!!
-                } else if (str[i + 1] == 'V' || str[i + 1] == 'X') {
-                    result = result + map[str[i + 1]]!! - 1
-                    break
+                when {
+                    // if now last index
+                    i == str.length - 1 -> result += map[str[i]]!!
+
+                    // if value with next index == V or X then get V or X and subtract value with current index and return
+                    str[i + 1] == 'V' || str[i + 1] == 'X' -> {
+                        result = result + map[str[i + 1]]!! - map[str[i]]!!
+                        continue
+                    }
+
+                    else -> result += map[str[i]]!!
                 }
             }
 
             'V' -> {
-                result += map[str[i]]!!
+                when {
+                    i - 1 >= 0 && str[i - 1] == 'I' -> continue
+                    else -> result += map[str[i]]!!
+                }
             }
 
             'X' -> {
-                result += map[str[i]]!!
+                when {
+                    i - 1 >= 0 && str[i - 1] == 'I' -> continue
+
+
+                    i + 1 > str.length - 1 -> result += map[str[i]]!!
+
+                    str[i + 1] == 'L' || str[i + 1] == 'C' -> {
+                        result = result + map[str[i + 1]]!! - map[str[i]]!!
+                        continue
+                    }
+
+                    else -> result += map[str[i]]!!
+                }
             }
 
             'L' -> {
-                result += map[str[i]]!!
+                when {
+                    i - 1 >= 0 && str[i - 1] == 'X' -> continue
+                    else -> result += map[str[i]]!!
+                }
             }
 
             'C' -> {
@@ -54,6 +76,7 @@ fun romanToInt(str: String): Int {
                 result += map[str[i]]!!
             }
         }
+    }
 
     return result
 }
