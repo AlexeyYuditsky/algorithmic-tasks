@@ -1,7 +1,7 @@
 package com.alexeyyuditsky.algorithmictasks.leetcode
 
 fun main() {
-    val res = romanToInt("LX")
+    val res = romanToInt("MMM")
     println(res)
 }
 
@@ -17,17 +17,15 @@ fun romanToInt(str: String): Int {
     )
 
     var result = 0
-    for (i in str.indices) {
+    con@ for (i in str.indices) {
         when (str[i]) {
             'I' -> {
                 when {
-                    // if now last index
                     i == str.length - 1 -> result += map[str[i]]!!
 
-                    // if value with next index == V or X then get V or X and subtract value with current index and return
                     str[i + 1] == 'V' || str[i + 1] == 'X' -> {
                         result = result + map[str[i + 1]]!! - map[str[i]]!!
-                        continue
+                        continue@con
                     }
 
                     else -> result += map[str[i]]!!
@@ -36,21 +34,20 @@ fun romanToInt(str: String): Int {
 
             'V' -> {
                 when {
-                    i - 1 >= 0 && str[i - 1] == 'I' -> continue
+                    i - 1 >= 0 && str[i - 1] == 'I' -> continue@con
                     else -> result += map[str[i]]!!
                 }
             }
 
             'X' -> {
                 when {
-                    i - 1 >= 0 && str[i - 1] == 'I' -> continue
-
+                    i - 1 >= 0 && str[i - 1] == 'I' -> continue@con
 
                     i + 1 > str.length - 1 -> result += map[str[i]]!!
 
                     str[i + 1] == 'L' || str[i + 1] == 'C' -> {
                         result = result + map[str[i + 1]]!! - map[str[i]]!!
-                        continue
+                        continue@con
                     }
 
                     else -> result += map[str[i]]!!
@@ -59,21 +56,38 @@ fun romanToInt(str: String): Int {
 
             'L' -> {
                 when {
-                    i - 1 >= 0 && str[i - 1] == 'X' -> continue
+                    i - 1 >= 0 && str[i - 1] == 'X' -> continue@con
                     else -> result += map[str[i]]!!
                 }
             }
 
             'C' -> {
-                result += map[str[i]]!!
+                when {
+                    i - 1 >= 0 && str[i - 1] == 'X' -> continue@con
+
+                    i + 1 > str.length - 1 -> result += map[str[i]]!!
+
+                    str[i + 1] == 'D' || str[i + 1] == 'M' -> {
+                        result = result + map[str[i + 1]]!! - map[str[i]]!!
+                        continue@con
+                    }
+
+                    else -> result += map[str[i]]!!
+                }
             }
 
             'D' -> {
-                result += map[str[i]]!!
+                when {
+                    i - 1 >= 0 && str[i - 1] == 'C' -> continue@con
+                    else -> result += map[str[i]]!!
+                }
             }
 
             'M' -> {
-                result += map[str[i]]!!
+                when {
+                    i - 1 >= 0 && str[i - 1] == 'C' -> continue@con
+                    else -> result += map[str[i]]!!
+                }
             }
         }
     }
