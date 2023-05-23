@@ -2,7 +2,7 @@ package com.alexeyyuditsky.algorithmictasks.leetcode
 
 /**
  * https://leetcode.com/problems/palindrome-number/
- */
+ * */
 fun main() {
     val res = isPalindrome2(-111)
     println(res)

@@ -2,7 +2,7 @@ package com.alexeyyuditsky.algorithmictasks.leetcode
 
 /**
  * https://leetcode.com/problems/two-sum/
- */
+ * */
 fun main() {
     val nums = intArrayOf(2, 3, 5, 5)
     val target = 9

@@ -4,8 +4,7 @@ import java.util.Stack
 
 /**
  * https://leetcode.com/problems/valid-parentheses/
- */
-
+ * */
 fun main() {
     val res = isValid("[(()]))")
     println(res)
