@@ -30,42 +30,21 @@ fun main() {
 }
 
 fun mergeTwoLists(list1: ListNode?, list2: ListNode?): ListNode? {
+    if (list1 == null) return list2
+    if (list2 == null) return list1
 
-    var currentNode1 = list1 ?: return null
-    var currentNode2 = list2 ?: return null
+    // (head:1, next: (head:2, next: (head:4, next: null)))
+    // (head:1, next: (head:3, next: (head:4, next: null)))
 
-    val array = mutableListOf<Int>()
-
-    while (true) {
-        array.add(currentNode1.`val`)
-        if (currentNode1.next == null) break
-        currentNode1 = currentNode1.next!!
+    val resultNode = ListNode(0)
+    if (list1.`val` <= list2.`val`) {
+        resultNode.`val` = list1.`val`
+        resultNode.next = mergeTwoLists(list1.next, list2)
+    } else {
+        resultNode.`val` = list2.`val`
+        resultNode.next = mergeTwoLists(list1, list2.next)
     }
 
-    while (true) {
-        array.add(currentNode2.`val`)
-        if (currentNode2.next == null) break
-        currentNode2 = currentNode2.next!!
-    }
-
-    array.sort()
-    println(array)
-
-
-    val arrays = mutableListOf<ListNode>()
-
-    for (value in array) {
-        arrays.add(ListNode(value))
-    }
-
-    val listNode = ListNode(array[0])
-
-    listNode.next = arrays[1]
-    listNode.next!!.next = arrays[2]
-    listNode.next!!.next!!.next = arrays[3]
-    listNode.next!!.next!!.next!!.next = arrays[4]
-    listNode.next!!.next!!.next!!.next!!.next = arrays[5]
-
-    return listNode
+    return resultNode
 }
 
