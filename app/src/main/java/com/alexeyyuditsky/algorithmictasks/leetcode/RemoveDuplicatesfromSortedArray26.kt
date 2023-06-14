@@ -15,16 +15,15 @@ fun removeDuplicates2(nums: IntArray): Int {
 
     for (i in 1 until nums.size) {
         if (nums[counter] != nums[i]) {
-            counter++
-            nums[counter] = nums[i]
+            nums[++counter] = nums[i]
         }
     }
-    return counter + 1
+    return ++counter
 }
 
 fun removeDuplicates(nums: IntArray): Int {
     for (i in nums.indices) {
-        for (j in 1 until nums.size) {
+        for (j in i + 1 until nums.size) {
             if (nums[i] == nums[j]) nums[j] = Int.MAX_VALUE
             if (nums[i] > nums[j]) {
                 val temp = nums[i]
