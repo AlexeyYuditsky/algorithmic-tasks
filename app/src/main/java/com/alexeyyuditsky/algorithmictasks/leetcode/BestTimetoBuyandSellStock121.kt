@@ -4,17 +4,26 @@ package com.alexeyyuditsky.algorithmictasks.leetcode
  * https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
  * */
 fun main() {
-    val res = maxProfit(intArrayOf(7, 3, 5, 3, 6, 4))
-    println(res)
+    val res = maxProfitNew(intArrayOf(2, 4, 1))
+    //println(res)
+}
+
+fun maxProfitNew(prices: IntArray): Int {
+    var max = 0
+    prices.forEachIndexed { index, value -> if (value > max && index != 0) max = value }
+    val min = prices.min() // находить минимальное значение которое стоит до максимального
+    val indexMax = prices.indexOfLast { it == max }
+    val indexMin = prices.indexOfFirst { it == min }
+    println(indexMin)
+    return if (indexMin < indexMax) max - min else 0
 }
 
 fun maxProfit(prices: IntArray): Int {
     prices.foldIndexed(prices[0]) { index, accumulator, element ->
-        println("index:$index, accumulator:$accumulator, element:$element")
-        prices[index] = element - accumulator // 7-7=0 // 1-7=-6 // 5-1=4 // 3-1=2 // 6-1=5 // 4-1=3
-        if (element < accumulator) element else accumulator// 7<7 7 // 1<7 1 // 5<1 1 // 3<1 1 // 5<1 1 // 4<1 1
+        println("index: $index, accumulator: $accumulator, element: $element")
+        prices[index] = element - accumulator // 4-4=0 // 6-4=2 // 3-4=-1 // 6-3=3 // 1-3=-2 // 6-1
+        if (element < accumulator) element else accumulator// 4 // 4 // 3 // 3 // 1 // 6
     }
-    println(prices.toList())
     return prices.max()
 }
 
