@@ -1,12 +1,11 @@
 package com.alexeyyuditsky.algorithmictasks.test
 
-import java.util.regex.Pattern
-
 fun main() {
-    val regex = "x[0-8a-f][0-8a-f]"
-    val text = "x2a"
-    val matcher = Pattern.compile(regex).matcher(text)
-    while (matcher.find()) {
-        println(text.substring(matcher.start(), matcher.end()))
-    }
+    val res = fact(10)
+    println(res)
+}
+
+fun fact(x: Int): Int {
+    if (x == 0) return 1
+    return x * fact(x - 1)
 }
