@@ -4,8 +4,6 @@ fun main() {
     val list = listOf(2, 4, 6)
     val sum = sum1(list)
     println(sum)
-
-    println(listOf(1).drop(1))
 }
 
 fun sum2(list: List<Int>): Int {
